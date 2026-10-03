@@ -34,10 +34,14 @@ pipeline {
         }
 
         stage('Deploy') {
+            environment {
+                JENKINS_NODE_COOKIE = 'dontKillMe'
+            }
             steps {
-                // Ensure PM2 is installed globally, then start or restart the app
-                sh 'npm install -g pm2'
-                sh 'npx pm2 start ecosystem.config.cjs'
+                // Serve the 'dist' folder (production build) on port 3000 and bind to all IPs
+                sh 'sudo npm install -g pm2'
+                sh 'npx pm2 delete node-static-app || true'
+                sh 'npx pm2 serve dist 3000 --name "node-static-app" --spa'
             }
         }
     }
