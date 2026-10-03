@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Pulls the latest code from your repository
-                checkout scm
+                git branch: 'main', url: 'https://github.com/harshalfct/node-static-app.git'
             }
         }
 
