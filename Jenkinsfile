@@ -42,6 +42,7 @@ pipeline {
                 sh 'sudo npm install -g pm2'
                 sh 'npx pm2 delete node-static-app || true'
                 sh 'npx pm2 serve dist 3000 --name "node-static-app" --spa'
+                pwd
             }
         }
     }
